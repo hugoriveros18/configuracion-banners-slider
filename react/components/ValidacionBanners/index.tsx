@@ -1,14 +1,14 @@
 import React from "react";
 import Banner from "../Banner";
 
-const ValidacionBanners = (banners:BannerPrincipal[]) => {
+const ValidacionBanners = (banners: BannerPrincipal[]) => {
 
   //JSX
-  return(
+  return (
     banners.map((banner, index) => {
-      if(banner.tipoConfiguracion.posiblesConfiguraciones === 'Activacion Manual') {
-        if(banner.tipoConfiguracion.estaActivo) {
-          return(
+      if (banner.tipoConfiguracion.posiblesConfiguraciones === 'Activacion Manual') {
+        if (banner.tipoConfiguracion.estaActivo) {
+          return (
             <Banner
               key={index}
               imagenDesktop={banner.imagenDesktop}
@@ -18,12 +18,12 @@ const ValidacionBanners = (banners:BannerPrincipal[]) => {
           )
         }
       } else {
-        if(banner.tipoConfiguracion.fechaInicio && banner.tipoConfiguracion.fechaFinal) {
+        if (banner.tipoConfiguracion.fechaInicio && banner.tipoConfiguracion.fechaFinal) {
           const ahora = new Date();
           const inputFechaInicio = new Date(banner.tipoConfiguracion.fechaInicio);
           const inputFechaFinal = new Date(banner.tipoConfiguracion.fechaFinal);
-          if(ahora.getTime() > inputFechaInicio.getTime() && ahora.getTime() < inputFechaFinal.getTime()) {
-            return(
+          if (ahora.getTime() > inputFechaInicio.getTime() && ahora.getTime() < inputFechaFinal.getTime()) {
+            return (
               <Banner
                 key={index}
                 imagenDesktop={banner.imagenDesktop}

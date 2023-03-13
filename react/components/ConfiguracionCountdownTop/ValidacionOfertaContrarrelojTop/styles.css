@@ -1,0 +1,12 @@
+.banner__general-container-top,
+.banner__general-container-top--image {
+  width: 100%;
+}
+
+.banner__general-container-top {
+  display: flex;
+  position: relative;
+  margin  : 0px;
+  padding : 0px;
+  cursor: pointer;
+}

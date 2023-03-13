@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useCssHandles } from 'vtex.css-handles';
-import { useFormatedTime } from "../../hooks/useFormatedTime";
-import CSS_HANDLES from "../../typings/cssHandles";
+import CSS_HANDLES from "../../../typings/cssHandles";
+import { useFormatedTime } from "../../../hooks/useFormatedTime";
 
-const Countdown = ({
+const CountdownSlider = ({
   textoCountdown,
   alineacionHorizontalCountdown,
   colorPlantillaCountdown,
@@ -181,4 +181,4 @@ const Countdown = ({
   )
 }
 
-export default Countdown;
+export default CountdownSlider;

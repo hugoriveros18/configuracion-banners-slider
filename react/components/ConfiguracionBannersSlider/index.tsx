@@ -1,34 +1,34 @@
 import React from 'react';
-import ValidacionBanners from '../ValidacionBanners';
 import { useListContext, ListContextProvider } from 'vtex.list-context';
-import BannersSliderSchema from '../../schema/BannersSliderSchema';
-import ValidacionOfertaContrarreloj from '../ValidacionOfertaContrarreloj';
+import {BannersSliderSchema} from '../../schema/BannersSliderSchema';
+import ValidacionOfertaContrarreloj from './ValidacionOfertaContrarreloj';
+import ValidacionBanners from '../ValidacionBanners';
 
-const ConfiguracionBannersSlider = ({ofertaContrarreloj, banners, children}:BannersSliderProps) => {
+const ConfiguracionBannersSlider = ({ ofertaContrarreloj, banners, children }: BannersSliderProps) => {
 
   //LIST CONTEXT
   const { list } = useListContext() || [];
 
   //VALIDACIONES
-  const validacionOfertaContrarreloj = ValidacionOfertaContrarreloj(ofertaContrarreloj);
+  const validacionOfertaContrarreloj = ofertaContrarreloj.length > 0 ? ofertaContrarreloj.map(oferta => ValidacionOfertaContrarreloj(oferta)) : [];
   const grupoBanners = ValidacionBanners(banners);
   let bannerParaVisualizar = [];
   if (validacionOfertaContrarreloj) {
-    bannerParaVisualizar = list.concat([validacionOfertaContrarreloj]);
-    bannerParaVisualizar = bannerParaVisualizar.concat(grupoBanners.filter(b => b!== undefined));
+    bannerParaVisualizar = list.concat(validacionOfertaContrarreloj.filter(b => b !== undefined));
+    bannerParaVisualizar = bannerParaVisualizar.concat(grupoBanners.filter(b => b !== undefined));
   } else {
-    bannerParaVisualizar = list.concat(grupoBanners.filter(b => b!== undefined));
+    bannerParaVisualizar = list.concat(grupoBanners.filter(b => b !== undefined));
   }
 
   //JSX
-  if(bannerParaVisualizar.length > 1) {
-    return(
+  if (bannerParaVisualizar.length > 1) {
+    return (
       <ListContextProvider list={bannerParaVisualizar}>
         {children}
       </ListContextProvider>
     )
-  } else if(bannerParaVisualizar.length === 1) {
-    return(
+  } else if (bannerParaVisualizar.length === 1) {
+    return (
       <>
         {bannerParaVisualizar}
       </>

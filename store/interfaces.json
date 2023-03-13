@@ -4,5 +4,11 @@
     "composition": "children",
     "allowed": "*",
     "render": "client"
+  },
+  "list-context.configuracion-countdown-slider-top": {
+    "component": "ConfiguracionCountdownTop",
+    "composition": "children",
+    "allowed": "*",
+    "render": "client"
   }
 }

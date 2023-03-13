@@ -1,7 +1,5 @@
 import React from "react";
 import { useDevice } from 'vtex.device-detector';
-import { useCssHandles } from 'vtex.css-handles';
-import CSS_HANDLES from "../../typings/cssHandles";
 
 
 const Banner = ({imagenDesktop, imagenMobile, urlRedireccion}:BannerProps) => {
@@ -9,19 +7,29 @@ const Banner = ({imagenDesktop, imagenMobile, urlRedireccion}:BannerProps) => {
   //DEVICE
   const { isMobile } = useDevice();
 
-  //CSS HANDLES
-  const handles = useCssHandles(CSS_HANDLES);
-
   //JSX
+  if(urlRedireccion === "" || urlRedireccion === undefined || urlRedireccion === "#") {
+    return(
+      <div
+        style={{width: '100%'}}
+      >
+        <img
+          alt="Banner"
+          src={isMobile ? imagenMobile : imagenDesktop}
+          style={{width: '100%'}}
+        />
+      </div>
+    )
+  }
   return(
     <a
       href={urlRedireccion}
-      className={`${handles['banner-general-container']}`}
+      style={{width: '100%'}}
     >
       <img
         alt="Banner"
         src={isMobile ? imagenMobile : imagenDesktop}
-        className={`${handles['banner-general-container']}`}
+        style={{width: '100%'}}
       />
     </a>
 

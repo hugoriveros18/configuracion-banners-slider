@@ -4,7 +4,7 @@ const BannersSliderSchema = {
   type: "object",
   properties: {
     ofertaContrarreloj: {
-      title: "Banner Ofertas Contrarreloj - Añadir Solo Uno",
+      title: "Banner Ofertas Contrarreloj",
       type: "array",
       items: {
         properties: {
@@ -165,4 +165,84 @@ const BannersSliderSchema = {
   }
 }
 
-export default BannersSliderSchema;
+
+
+const CountdownTopSliderSchema = {
+  title: "Configuracion Banners Coundown Top",
+  description: "Configuracion Individual de Banners de Oferta Contrarreloj en el Header",
+  type: "object",
+  properties: {
+    ofertaContrarreloj: {
+      title: "Banner Ofertas Contrarreloj",
+      type: "array",
+      items: {
+        properties: {
+          imagenDesktop: {
+            title: "Imagen de Banner - Desktop",
+            type: "string",
+            default: '',
+            widget: {
+              "ui:widget": "image-uploader"
+            }
+          },
+          imagenMobile: {
+            title: "Imagen de Banner - Mobile",
+            type: "string",
+            default: '',
+            widget: {
+              "ui:widget": "image-uploader"
+            }
+          },
+          urlRedireccion: {
+            title: "Url de Redireccion Banner",
+            type: "string",
+            default: ''
+          },
+          textoCountdown: {
+            title: "Titulo del Countdown",
+            type: "string"
+          },
+          alineacionHorizontalCountdown: {
+            title: "Alineacion Horizontal Countdown",
+            type: "string",
+            enum: [
+              "izquierda",
+              "centro",
+              "derecha"
+            ]
+          },
+          colorPlantillaCountdown: {
+            title: "Color General Plantilla Countdown",
+            type: "string",
+            widget: {
+              "ui:widget": "color"
+            }
+          },
+          colorTiempoCountdown: {
+            title: "Color del Tiempo del Countdown",
+            type: "string",
+            widget: {
+              "ui:widget": "color"
+            }
+          },
+          fechaInicio: {
+            title: "Fecha y Hora de Inicio Oferta",
+            type: "string",
+            widget: {
+              "ui:widget": "date-time"
+            }
+          },
+          fechaFinal: {
+            title: "Fecha y Hora de Final Oferta",
+            type: "string",
+            widget: {
+              "ui:widget": "date-time"
+            }
+          },
+        }
+      },
+    }
+  }
+}
+
+export { BannersSliderSchema, CountdownTopSliderSchema };

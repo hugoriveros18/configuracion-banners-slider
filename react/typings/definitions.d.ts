@@ -43,6 +43,11 @@ type BannersSliderProps = {
   children: ReactNode
 }
 
+type CountdownTopBannersProps = {
+  ofertaContrarreloj: OfertaContrarreloj[]
+  children: ReactNode
+}
+
 type BannerProps = {
   imagenDesktop: string
   imagenMobile: string
