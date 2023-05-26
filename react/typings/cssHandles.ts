@@ -27,7 +27,9 @@ const CSS_HANDLES = [
   'time-container__box-text-top--text',
   'alineacion-izquierda',
   'alineacion-centro',
-  'alineacion-derecha'
+  'alineacion-derecha',
+  'simple-banner__container',
+  'simple-banner__image'
 ]
 
 export default CSS_HANDLES;
