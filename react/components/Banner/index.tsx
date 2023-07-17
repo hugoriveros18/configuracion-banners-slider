@@ -3,14 +3,23 @@ import { useCssHandles } from 'vtex.css-handles';
 import { useDevice } from 'vtex.device-detector';
 import CSS_HANDLES from "../../typings/cssHandles";
 
+const CSS_HANDLES = [
+  'simple-banner__container',
+  'simple-banner__image'
+]
 
-const Banner = ({imagenDesktop, imagenMobile, urlRedireccion}:BannerProps) => {
+
+const Banner = ({
+  imagenDesktop,
+  imagenMobile,
+  urlRedireccion}
+:BannerProps) => {
 
   //CSS HANDLES
   const handles = useCssHandles(CSS_HANDLES);
 
   //DEVICE
-  const { isMobile } = useDevice();
+  const { device } = useDevice();
 
   //JSX
   if(urlRedireccion === "" || urlRedireccion === undefined || urlRedireccion === "#") {
@@ -21,7 +30,7 @@ const Banner = ({imagenDesktop, imagenMobile, urlRedireccion}:BannerProps) => {
       >
         <img
           alt="Banner"
-          src={isMobile ? imagenMobile : imagenDesktop}
+          src={device === 'phone' ? imagenMobile : imagenDesktop}
           style={{width: '100%'}}
         className={handles['simple-banner__image']}
         />
@@ -36,7 +45,7 @@ const Banner = ({imagenDesktop, imagenMobile, urlRedireccion}:BannerProps) => {
     >
       <img
         alt="Banner"
-        src={isMobile ? imagenMobile : imagenDesktop}
+        src={device === 'phone' ? imagenMobile : imagenDesktop}
         style={{width: '100%'}}
         className={handles['simple-banner__image']}
       />

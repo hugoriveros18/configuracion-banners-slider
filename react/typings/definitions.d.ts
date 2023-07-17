@@ -1,5 +1,4 @@
 type PosiblesConfiguraciones = 'Por Fechas' | 'Activacion Manual'
-type PosicionHorizontalContador = "izquierda" | "centro" | "derecha";
 
 type TipoConfiguracion = {
   posiblesConfiguraciones: PosiblesConfiguraciones
@@ -20,11 +19,11 @@ type OfertaContrarreloj = {
   imagenMobile: string
   urlRedireccion: string
   textoCountdown: string
-  alineacionHorizontalCountdown: PosicionHorizontalContador
   colorPlantillaCountdown: string
   colorTiempoCountdown: string
   fechaInicio: string
   fechaFinal: string
+  estaActivo: boolean
 }
 
 type CountdownProps = {
@@ -43,13 +42,14 @@ type BannersSliderProps = {
   children: ReactNode
 }
 
-type CountdownTopBannersProps = {
-  ofertaContrarreloj: OfertaContrarreloj[]
-  children: ReactNode
-}
-
 type BannerProps = {
   imagenDesktop: string
   imagenMobile: string
   urlRedireccion: string
 }
+
+type FormatedTimeProps = {
+  fechaInicio: string
+  fechaFinal: string
+}
+

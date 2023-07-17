@@ -14,7 +14,7 @@ const ConfiguracionBannersSlider = ({ ofertaContrarreloj, banners, children }: B
   const grupoBanners = ValidacionBanners(banners);
   let bannerParaVisualizar = [];
   if (validacionOfertaContrarreloj) {
-    bannerParaVisualizar = list.concat(validacionOfertaContrarreloj.filter(b => b !== undefined));
+    bannerParaVisualizar = list.concat(validacionOfertaContrarreloj.filter(b => b !== null));
     bannerParaVisualizar = bannerParaVisualizar.concat(grupoBanners.filter(b => b !== undefined));
   } else {
     bannerParaVisualizar = list.concat(grupoBanners.filter(b => b !== undefined));

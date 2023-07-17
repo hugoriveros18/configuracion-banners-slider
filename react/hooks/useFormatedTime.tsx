@@ -1,76 +1,69 @@
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from "react";
 
-type TimepoRestante = {
-  segundos: string
-  minutos: string
-  horas: string
-  dias: string
-}
+export default function useFormatedTime({
+  fechaInicio = '2023-06-14T17:19:00.000Z',
+  fechaFinal = '2023-06-17T17:19:00.000Z'
+}:FormatedTimeProps) {
 
-const tiempoRestanteValorInicial:TimepoRestante = {
-  dias: '01',
-  segundos: '00',
-  minutos: '00',
-  horas: '00'
-}
-
-const useFormatedTime = (fechaInicio: string, fechaFinal: string) => {
-
-  //ESTADOS
-  const [tiempoRestante, setTiempoRestante] = useState<TimepoRestante>(tiempoRestanteValorInicial);
-  const [tiempoFinalizado, setTiempoFinalizado] = useState<boolean>(false);
-
-  //CONSTANTES
+  //MEDIDAS DE TIEMPO
   const segundoEnMilisegundos = 1000;
   const segundosPorMinuto = 60;
-  const segundosPorHora = 60 * segundosPorMinuto;
-  const segundosPorDia = 24 * segundosPorHora;
+  const segundosPorHora = 3600;
+  const segundosPorDia = 86400;
 
-  //METODOS
-  const llenarConCeros = (numeroDeDigitos:number, numero:number) => {
-    const completado = `${'0'.repeat(numeroDeDigitos - 1)}${numero}`
+  //STATES
+  const [isBannerActive, setIsBannerActive] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [segundosRestantes, setSegundosRestantes] = useState<number>(0);
+  const [segundos, setSegundos] = useState<number>(0);
+  const [minutos, setMinutos] = useState<number>(0);
+  const [horas, setHoras] = useState<number>(0);
+  const [dias, setDias] = useState<number>(0);
 
-    return completado.slice(completado.length - numeroDeDigitos);
-  }
-
-  const tiempoToRender = (totalSegundos:number) => {
-    const dias = Math.floor(totalSegundos / segundosPorDia);
-    const horas = Math.floor((totalSegundos % segundosPorDia) / segundosPorHora);
-    const minutos = Math.floor(((totalSegundos % segundosPorDia) % segundosPorHora) / segundosPorMinuto);
-    const segundos = Math.floor(((totalSegundos % segundosPorDia) % segundosPorHora) % segundosPorMinuto);
-
-    return {
-      segundos: llenarConCeros(2, segundos),
-      minutos: llenarConCeros(2, minutos),
-      horas: llenarConCeros(2, horas),
-      dias: llenarConCeros(2, dias)
-    }
-  }
-
-  //EFECTOS
+  //EFFECTS
   useEffect(() => {
-    const fechaHoy = new Date();
-    const fechaInicioConvert = new Date(fechaInicio);
-    const fechaFinalConvert = new Date(fechaFinal);
+    const hoyToDate = new Date();
+    const inicioToDate = new Date(fechaInicio);
+    const finalToDate = new Date(fechaFinal);
 
-    if(fechaHoy.getTime() > fechaInicioConvert.getTime() && fechaHoy.getTime() < fechaFinalConvert.getTime()) {
-      let segundosRestantes = (fechaFinalConvert.getTime() - fechaHoy.getTime())/segundoEnMilisegundos;
+    if(hoyToDate.getTime() > inicioToDate.getTime() && hoyToDate.getTime() < finalToDate.getTime()) {
+      let segundosEstadoIncial = Math.floor((finalToDate.getTime() - hoyToDate.getTime())/segundoEnMilisegundos);
       setInterval(() => {
-        setTiempoRestante(tiempoToRender(segundosRestantes))
-        segundosRestantes -= 1;
-        if(segundosRestantes === 0) {
-          setTiempoFinalizado(true);
-        }
-      },segundoEnMilisegundos)
+        setSegundosRestantes(segundosEstadoIncial);
+        segundosEstadoIncial -= 1;
+      }, segundoEnMilisegundos)
     } else {
-      setTiempoFinalizado(true);
+      setIsBannerActive(false);
+      setLoading(false);
     }
-  },[])
+
+  }, [fechaInicio, fechaFinal])
+
+  useEffect(() => {
+    if(segundosRestantes > 0) {
+      const diasFormateado = Math.floor(segundosRestantes / segundosPorDia);
+      const horasFormateado = Math.floor((segundosRestantes % segundosPorDia) / segundosPorHora);
+      const minutosFormateado = Math.floor(((segundosRestantes % segundosPorDia) % segundosPorHora) / segundosPorMinuto);
+      const segundosFormateado = Math.floor(((segundosRestantes % segundosPorDia) % segundosPorHora) % segundosPorMinuto);
+
+      setDias(diasFormateado),
+      setHoras(horasFormateado),
+      setMinutos(minutosFormateado);
+      setSegundos(segundosFormateado);
+      setLoading(false);
+      setIsBannerActive(true);
+    } else {
+      setIsBannerActive(false);
+    }
+  }, [segundosRestantes])
 
   return {
-    tiempoRestante,
-    tiempoFinalizado
+    isBannerActive,
+    loading,
+    segundos,
+    minutos,
+    horas,
+    dias
   }
 }
 
-export { useFormatedTime };
