@@ -11,6 +11,7 @@ type BannerPrincipal = {
   imagenDesktop: string
   imagenMobile: string
   urlRedireccion: string
+  abrirNuevaPestaña: boolean
   tipoConfiguracion: TipoConfiguracion
 }
 
@@ -46,6 +47,7 @@ type BannerProps = {
   imagenDesktop: string
   imagenMobile: string
   urlRedireccion: string
+  abrirNuevaPestaña: boolean
 }
 
 type FormatedTimeProps = {

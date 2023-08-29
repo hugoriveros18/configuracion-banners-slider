@@ -14,6 +14,7 @@ const ValidacionBanners = (banners: BannerPrincipal[]) => {
               imagenDesktop={banner.imagenDesktop}
               imagenMobile={banner.imagenMobile}
               urlRedireccion={banner.urlRedireccion}
+              abrirNuevaPestaña={banner.abrirNuevaPestaña}
             />
           )
         }
@@ -29,6 +30,7 @@ const ValidacionBanners = (banners: BannerPrincipal[]) => {
                 imagenDesktop={banner.imagenDesktop}
                 imagenMobile={banner.imagenMobile}
                 urlRedireccion={banner.urlRedireccion}
+                abrirNuevaPestaña={banner.abrirNuevaPestaña}
               />
             )
           }

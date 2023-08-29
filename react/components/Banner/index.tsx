@@ -12,8 +12,9 @@ const CSS_HANDLES = [
 const Banner = ({
   imagenDesktop,
   imagenMobile,
-  urlRedireccion}
-:BannerProps) => {
+  urlRedireccion,
+  abrirNuevaPestaña = false
+}:BannerProps) => {
 
   //CSS HANDLES
   const handles = useCssHandles(CSS_HANDLES);
@@ -37,6 +38,26 @@ const Banner = ({
       </div>
     )
   }
+
+  if(abrirNuevaPestaña) {
+    return(
+      <a
+        href={urlRedireccion}
+        style={{width: '100%'}}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={handles['simple-banner__container']}
+      >
+        <img
+          alt="Banner"
+          src={device === 'phone' ? imagenMobile : imagenDesktop}
+          style={{width: '100%'}}
+          className={handles['simple-banner__image']}
+        />
+      </a>
+    )
+  }
+
   return(
     <a
       href={urlRedireccion}
@@ -50,7 +71,6 @@ const Banner = ({
         className={handles['simple-banner__image']}
       />
     </a>
-
   )
 }
 

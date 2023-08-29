@@ -96,6 +96,11 @@ const BannersSliderSchema = {
             type: "string",
             default: ''
           },
+          abrirNuevaPestaña: {
+            title: "¿Abrir en nueva pestaña?",
+            type: "boolean",
+            default: false
+          },
           tipoConfiguracion: {
             title: "Tipo Configuracion",
             type: "object",
